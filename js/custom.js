@@ -1,5 +1,5 @@
 /* =================================
-   LOADER                     
+   LOADER
 =================================== */
 // makes sure the whole site is loaded
 jQuery(window).load(function() {
@@ -16,26 +16,6 @@ jQuery(window).load(function() {
 $(".video-container").fitVids();
 
 
-
-/* =================================
-===  MAILCHIMP                 ====
-=================================== */
-
-$('.mailchimp').ajaxChimp({
-    callback: mailchimpCallback,
-    url: "http://webdesign7.us6.list-manage.com/subscribe/post?u=9445a2e155b82208d73433060&amp;id=16dc80e353" //Replace this with your own mailchimp post URL. Don't remove the "". Just paste the url inside "".  
-});
-
-function mailchimpCallback(resp) {
-     if (resp.result === 'success') {
-        $('.subscription-success').html('<i class="icon_check_alt2"></i><br/>' + resp.msg).fadeIn(1000);
-        $('.subscription-error').fadeOut(500);
-        
-    } else if(resp.result === 'error') {
-        $('.subscription-error').html('<i class="icon_close_alt2"></i><br/>' + resp.msg).fadeIn(1000);
-    }  
-}
-
 /* =================================
 ===  STICKY NAV                 ====
 =================================== */
@@ -46,7 +26,7 @@ $(document).ready(function() {
     filter: ':not(.external)',
     changeHash: true
   });
-  
+
 });
 
 
@@ -102,7 +82,7 @@ jQuery(function( $ ){
 ===  VIDEO BACKGROUND           ====
 =================================== */
 if (matchMedia('(min-width: 640px)').matches) {
-   
+
    $(document).ready(function() {
     var videobackground = new $.backgroundVideo($('body'), {
       "align": "centerXY",
@@ -122,8 +102,8 @@ if (matchMedia('(min-width: 640px)').matches) {
 =================================== */
 function alturaMaxima() {
   var altura = $(window).height();
-  $(".full-screen").css('min-height',altura); 
-  
+  $(".full-screen").css('min-height',altura);
+
 }
 
 $(document).ready(function() {
@@ -198,38 +178,6 @@ $(document).ready(function () {
 });
 
 
-/* =================================
-===  SUBSCRIPTION FORM          ====
-=================================== */
-$("#subscribe").submit(function (e) {
-    e.preventDefault();
-    var email = $("#subscriber-email").val();
-    var dataString = 'email=' + email;
-
-    function isValidEmail(emailAddress) {
-        var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
-        return pattern.test(emailAddress);
-    };
-
-    if (isValidEmail(email)) {
-        $.ajax({
-            type: "POST",
-            url: "subscribe/subscribe.php",
-            data: dataString,
-            success: function () {
-                $('.subscription-success').fadeIn(1000);
-                $('.subscription-error').fadeOut(500);
-                $('.hide-after').fadeOut(500);
-            }
-        });
-    } else {
-        $('.subscription-error').fadeIn(1000);
-    }
-
-    return false;
-});
-
-
 
 /* =================================
 ===  CONTACT FORM          ====
@@ -238,19 +186,22 @@ $("#contact").submit(function (e) {
     e.preventDefault();
     var name = $("#name").val();
     var email = $("#email").val();
-    var subject = $("#subject").val();
-    var message = $("#message").val();
-    var dataString = 'name=' + name + '&email=' + email + '&subject=' + subject + '&message=' + message;
+    var phone = $("#phone").val();
+    var dataString = "";
 
     function isValidEmail(emailAddress) {
         var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
         return pattern.test(emailAddress);
     };
 
-    if (isValidEmail(email) && (message.length > 1) && (name.length > 1)) {
+    console.log(name);
+    console.log(phone);
+    console.log(email);
+
+    if (isValidEmail(email) && (phone.length >= 7) && (name.length > 1)) {
         $.ajax({
             type: "POST",
-            url: "sendmail.php",
+            url: "https://visitor2.constantcontact.com/api/signup?ca=534df061-b079-4eab-87e2-2440f9d88586&email=" + email + "&first_name=" + name + "&phone=" + phone,
             data: dataString,
             success: function () {
                 $('.success').fadeIn(1000);
@@ -280,8 +231,8 @@ $('.expand-form').simpleexpand({
 /* =================================
 ===  STELLAR                    ====
 =================================== */
-$(window).stellar({ 
-horizontalScrolling: false 
+$(window).stellar({
+horizontalScrolling: false
 });
 
 
