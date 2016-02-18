@@ -194,10 +194,6 @@ $("#contact").submit(function (e) {
         return pattern.test(emailAddress);
     };
 
-    console.log(name);
-    console.log(phone);
-    console.log(email);
-
     if (isValidEmail(email) && (phone.length >= 7) && (name.length > 1)) {
         $.ajax({
             type: "POST",
